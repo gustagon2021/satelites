@@ -1,0 +1,56 @@
+program satelites  ;
+
+type 
+    cadena30 = string[30]; 
+    satelite = record
+      nombre: cadena30; 
+      diametrokm: real;
+      masakg: real; 
+      radiokm: integer; 
+      orbital: real; 
+      end; 
+    lista = ^nodo; 
+    nodo = record
+      dato: satelite; 
+      sig: lista; 
+      end;  
+        
+procedure leerSatelite(var s: satelite); 
+begin
+     with s do begin 
+       writeln('ingrese nombre');
+       readln(nombre);
+       if(nombre <> 'fin')then begin
+       writeln('ingrese diametro'); 
+       readln(diametrokm);
+       writeln('ingrese masa');
+       readln(masakg);
+       writeln('ingrese radio');
+       readln(radiokm);
+       writeln('ingrese orbita'); 
+       readln(orbital);
+       end;
+       end; 
+end; 
+
+procedure agregarAdelante(var l: lista; s: satelite); 
+var 
+   nue: lista; 
+begin 
+   new(nue); 
+   nue^.dato:= s; 
+   nue^.sig:= l; 
+   l:= nue; 
+end; 
+
+var 
+  l: lista; s: satelite; 
+begin 
+   l:= nil; 
+   leerSatelite(s);  
+   while (s.nombre <> 'fin')do begin 
+      agregarAdelante(l,s);
+      leerSatelite(s); 
+      end;       
+end.                     
+      
